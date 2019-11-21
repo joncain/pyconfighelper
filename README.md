@@ -6,7 +6,7 @@ pip3 install pyconfighelper
 
 See the pydoc command: `pydoc3 pyconfighelper`
 
-## Usage Example
+## Example Usage
 
 ```
 import logging

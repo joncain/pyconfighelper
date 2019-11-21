@@ -22,8 +22,7 @@ helper = ConfigHelper(
 
 # This token should be stored in a secure location to be
 # consumed by your runtime environment. The encode_secret() method
-# is intended to be used as a utility to generate tokens, not as a
-# runtime method.
+# is intended as a utility to generate tokens, not a runtime method.
 #
 # Replace <github_user> and <github_secret> with your values.
 token = helper.encode_secret('<github_user>:<github_secret>')

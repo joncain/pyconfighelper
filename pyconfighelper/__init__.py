@@ -1,5 +1,7 @@
 """
-Retrieve an encrypted JSON configuration file from Github and decrypt it.
+pyconfighelper
+
+Retrieve an encrypted JSON configuration file from Github and decrypt it. Encryption/Decryption is performed via Google Cloud KMS keys.
 """
 
 import logging
@@ -7,7 +9,10 @@ from google.cloud import kms_v1 as kms
 import base64
 import json
 import requests
+import os
 from cryptography.fernet import Fernet
+from pathlib import Path
+
 
 class ConfigHelper:
     def __init__(self, **kwargs):
@@ -144,3 +149,37 @@ class ConfigHelper:
         decrypted_config = f.decrypt(encrypted_config)
         config = json.loads(decrypted_config)
         return config
+
+    def encrypt_config(self, config_file_path):
+        """
+        Encrypt JSON configuration file. Output dek.enc and config.enc
+        files that are to be uploaded to Github.
+
+        Keyword arguments:
+        config_file_path -- The path to the JSON file to be encrypted.
+        """
+        fs = open(config_file_path, mode='r')
+        config = fs.read()
+
+        try:
+            json.loads(config)
+        except:
+            self._log.debug('config: %s', config)
+            self._log.exception('Config contents could not be parsed as JSON.')
+
+        output_path = os.path.dirname(fs.name)
+        self._log.debug('output_path: %s', output_path)
+
+        # Generate a dek.enc file
+        dek = Fernet.generate_key()
+        encrypted_dek = self.encrypt(dek.decode('utf-8'))
+        dek_path = Path(os.path.join(output_path, 'dek.enc'))
+        with dek_path.open(mode='wb') as f:
+            f.write(encrypted_dek)
+
+        # Encrypt and write config.enc file
+        f = Fernet(dek)
+        encrypted_config = f.encrypt(config.encode('utf-8'))
+        cfg_path = Path(os.path.join(output_path, 'config.enc'))
+        with cfg_path.open(mode='wb',) as f:
+            f.write(encrypted_config)

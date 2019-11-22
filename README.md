@@ -13,11 +13,10 @@ import logging
 from pyconfighelper import ConfigHelper
 
 helper = ConfigHelper(
-    environment='test',
     kms_project='my-google-cloud-platform-project',
     kms_location='global',
     kms_key_ring='my-kms-key-ring',
-    kms_key='my-kms-key-name',
+    kms_key_name='my-kms-key-name',
     log_level=logging.DEBUG)
 
 # This token should be stored in a secure location to be
@@ -34,3 +33,13 @@ config = helper.get_config(base_github_url, token)
 
 print(config)
 ```
+
+## Encrypting Configs
+
+This command takes a JSON 
+
+`python3 -m pyconfighelper.encryptconfig --path ./config.json --kms_project myproject --kms_location global --kms_key_ring mykeyring --kms_key_name mykeyname`
+
+## Suggested Reading
+https://cloud.google.com/kms/docs/encrypt-decrypt
+https://cloud.google.com/kms/docs/envelope-encryption

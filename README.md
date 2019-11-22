@@ -36,7 +36,7 @@ print(config)
 
 ## Encrypting Configs
 
-This command takes a JSON 
+This command encrypts a JSON configuration file. It outputs two files (dek.enc, config.enc) that are to be uploaded to Github.
 
 `python3 -m pyconfighelper.encryptconfig --path ./config.json --kms_project myproject --kms_location global --kms_key_ring mykeyring --kms_key_name mykeyname`
 

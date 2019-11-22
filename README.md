@@ -42,4 +42,5 @@ This command encrypts a JSON configuration file. It outputs two files (dek.enc, 
 
 ## Suggested Reading
 https://cloud.google.com/kms/docs/encrypt-decrypt
+
 https://cloud.google.com/kms/docs/envelope-encryption

@@ -10,7 +10,7 @@ setuptools.setup(name='pyconfighelper',
                  include_package_data=True,
                  packages=['pyconfighelper'],
                  install_requires=[
-                     'google-cloud-kms',
+                     'google-cloud-kms==1.4.0',
                      'cryptography',
                      'requests'
                  ],

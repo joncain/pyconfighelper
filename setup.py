@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(name='pyconfighelper',
-                 version = '0.0.8',
+                 version = '0.0.9',
                  description='Retrieve an encrypted JSON configuration file from Github and decrypt it. Encryption/Decryption is performed via Google Cloud KMS keys.',
                  url='http://github.com/joncain/pyconfighelper',
                  author='Jon Cain',
@@ -10,7 +10,7 @@ setuptools.setup(name='pyconfighelper',
                  include_package_data=True,
                  packages=['pyconfighelper'],
                  install_requires=[
-                     'google-cloud-kms==1.4.0',
+                     'google-cloud-kms==1.2.1',
                      'cryptography',
                      'requests'
                  ],
